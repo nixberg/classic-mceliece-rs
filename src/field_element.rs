@@ -85,6 +85,12 @@ impl FieldElement {
     }
 
     #[inline]
+    pub(crate) fn vartime_is_zero(&self) -> bool {
+        self.debug_is_valid();
+        self.0 == FieldElement::ZERO.0
+    }
+
+    #[inline]
     pub(crate) fn is_zero_mask(&self) -> FieldElement {
         self.debug_is_valid();
         (((self.0 as u32).wrapping_sub(1) >> 19) as u16).into()

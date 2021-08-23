@@ -6,9 +6,8 @@ fn hash(
     ciphertext: Option<&[u8; ClassicMcEliece::CIPHERTEXT_BYTES]>,
     output: &mut [u8; ClassicMcEliece::SESSION_KEY_BYTES],
 ) {
-    use std::io::Read;
-
     use digest::{ExtendableOutput, Update};
+    use std::io::Read;
 
     let mut hasher = sha3::Shake256::default();
 

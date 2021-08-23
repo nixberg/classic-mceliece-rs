@@ -166,13 +166,13 @@ impl PublicKey {
     }
 }
 
-// TODO: Test!
+// TODO: Add test.
 fn seeded_fixed_weight(seed: &[u8; ClassicMcEliece::L_BYTES]) -> [u8; ClassicMcEliece::N_BYTES] {
     let mut seed = *seed;
     let mut ind = [0u16; ClassicMcEliece::T];
 
     loop {
-        let mut bytes = [0u8; 2 * 2 * ClassicMcEliece::T]; // TODO: asd
+        let mut bytes = [0u8; 2 * 2 * ClassicMcEliece::T]; // TODO: ?
 
         let mut generator = Generator::new(65, &seed);
         generator.squeeze(&mut bytes);
@@ -183,13 +183,12 @@ fn seeded_fixed_weight(seed: &[u8; ClassicMcEliece::L_BYTES]) -> [u8; ClassicMcE
             *num = u16::from_le_bytes(bytes.try_into().unwrap()) & FieldElement::MASK;
         }
 
-        // moving and counting indices in the correct range
+        // Moving and counting indices in the correct range:
 
         let mut count = 0;
 
         for num in nums.iter() {
             if count >= ClassicMcEliece::T {
-                // TODO: Ok?
                 break;
             }
             if *num < ClassicMcEliece::N as u16 {

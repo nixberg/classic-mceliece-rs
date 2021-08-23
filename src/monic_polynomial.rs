@@ -57,7 +57,7 @@ impl MonicPolynomial {
 
         for j in 0..ClassicMcEliece::T {
             for k in (j + 1)..ClassicMcEliece::T {
-                // TODO: is_zero_mask would be faster, wouldn’t need ConstantTimeEq/Select.
+                // TODO: Use is_zero_mask?
                 let jj_is_zero = matrix[j].0[j].ct_eq(&FieldElement::ZERO);
                 for row in matrix.iter_mut().take(ClassicMcEliece::T + 1).skip(j) {
                     row.0[j] += FieldElement::conditional_select(
@@ -68,7 +68,7 @@ impl MonicPolynomial {
                 }
             }
 
-            if matrix[j].0[j].ct_eq(&FieldElement::ZERO).into() {
+            if matrix[j].0[j].vartime_is_zero() {
                 return None;
             }
 
