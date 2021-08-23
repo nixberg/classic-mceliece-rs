@@ -4,7 +4,7 @@
 
 Experimental, do not use.
 
-Rust implementation of `kem/mceliece348864`.
+Rust implementation of [`kem/mceliece348864`](https://classic.mceliece.org/).
 
 ## Notes
 
